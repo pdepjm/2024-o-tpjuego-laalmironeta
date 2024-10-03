@@ -1,16 +1,57 @@
-object pepita {
-  var energy = 100
-  const position = new MutablePosition(x=0, y=0)
 
-  method image() = "golondrina.png"
-  method position() = position
+object entrenador {
+  const pokemon = pokemonNuestro
+}
 
-  method energy() = energy
 
-  method fly(minutes) {
-    energy = energy - minutes * 3
-    position.goRight(minutes)
-    position.goUp(minutes)
-  }
+
+object pokemonNuestro {
+  var nombre = "Pikachu"
+  var vida = 100
+  const tipo = "electrico"
+  var poderes =[]
+
+  method vida() = vida 
+  
+}
+
+// Poderes:
+object impactrueno {
+  method danio() = 20
+}
+object mordisco {
+  method danio() = 15
+}
+object ataqueRapido {
+  method danio() = 15
+}
+
+object descanso {
+  method danio() = 0
+}
+
+object alf {
+  const pokemon = pokemonAlf
+  
+}
+
+object pokemonAlf {
+  var nombre = "wartortle"
+  var vida = 100
+  const tipo = "agua"
+  var poderes =[]
+
+}
+
+object Lucas {
+  const pokemon = pokemonLucas
+  
+}
+
+object pokemonLucas {
+  var nombre = "wartortle"
+  var vida = 100
+  const tipo = "agua"
+  var poderes =[]
 
 }
