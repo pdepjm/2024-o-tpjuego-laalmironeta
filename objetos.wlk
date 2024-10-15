@@ -1,16 +1,22 @@
 
 object entrenador {
   const pokemon = pokemonNuestro
+  method pelear() {
+    
+  }
 }
 
-
+object mapa {
+  var property position = game.origin()
+  method image() = "mapa2.png"
+}
 
 object pokemonNuestro {
   var nombre = "Pikachu"
   var vida = 100
   const tipo = "electrico"
   var poderes =[]
-
+  
   method vida() = vida 
   
 }
