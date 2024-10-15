@@ -1,18 +1,28 @@
-import pepita.*
 import wollok.game.*
 import objetos.*
+
 object juego {
   
   method iniciar() {
-    game.title("PokeWollok")
-	  game.height(10)
-	  game.width(10)
-	  game.cellSize(100)
-  	game.addVisual(mapa)
-    //keyboard.e().onPressDo({entrenador.pelear(alf)})
+    self.hacerConfiguracionInicial()
+    game.addVisualCharacter(entrenador)
+    keyboard.e().onPressDo({self.pelea()})
+    keyboard.q().onPressDo({self.quitarPelea()})
+    
   }
   
-  
+  method hacerConfiguracionInicial() {
+		game.title("PokeWollok")
+		game.width(40)
+		game.height(40) 
+		game.boardGround("mapa2.png")} 
+
+    method pelea() {
+      game.addVisual(fondoPelea)
+      }
+    method quitarPelea() {
+      game.removeVisual(fondoPelea)
+    }  
 }
 
 
