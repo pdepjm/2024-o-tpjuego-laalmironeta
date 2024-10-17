@@ -13,8 +13,8 @@ object entrenador {
 }
 
 object fondoPelea {
-  var property position = game.center()
-  method image() = "fondoPelea3.png"
+  var property position = game.origin()
+  method image() = "fondoPelea6.png"
 }
 
 object pokemonNuestro {
@@ -22,6 +22,8 @@ object pokemonNuestro {
   const tipo = "electrico"
   var property vida = 100
   const poderes = [impactrueno,placaje,mordisco,descanso]
+  method image() = "pikachu.png"
+  var property position = game.at(2, 10)
 
   method recibirDanio(poder){
  		vida = 0.max(vida - poder.danioBase())
@@ -77,6 +79,8 @@ object pokemonAlf {
   const tipo = "agua"
   var vida = 100
   var poderes =[pistolaDeAgua,placaje,mordisco,descanso]
+  method image() = "squirtle.png"
+  var property position = game.at(23, 16) 
    
 }
 
