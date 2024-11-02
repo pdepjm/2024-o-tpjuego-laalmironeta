@@ -6,11 +6,14 @@ object juego {
   method iniciar() {
     self.hacerConfiguracionInicial()
     game.addVisualCharacter(entrenador)
-    keyboard.e().onPressDo({self.pelea()})
-    keyboard.q().onPressDo({self.quitarPelea()})
+    game.addVisual(alf)
+    entrenador.iniciarPelea()
+    
     
   }
   
+ 
+
   method hacerConfiguracionInicial() {
 		game.title("PokeWollok")
 		game.width(40)
@@ -20,8 +23,9 @@ object juego {
 
     method pelea() {
       game.addVisual(fondoPelea)
-      game.addVisualCharacter(pokemonAlf)
-      game.addVisualCharacter(pokemonNuestro)
+      game.addVisual(pokemonAlf)
+      game.addVisual(pokemonNuestro)
+
       }
     method quitarPelea() {
       game.removeVisual(fondoPelea)

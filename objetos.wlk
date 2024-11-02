@@ -6,6 +6,16 @@ object entrenador {
   method position() = position
   method image() = "entrenador2.png"
   const pokemon = pokemonNuestro
+  
+  method iniciarPelea() {
+    game.onCollideDo(alf, alf.consultarPelea() )
+    keyboard.e().onPressDo({juego.pelea()})
+    keyboard.q().onPressDo({juego.quitarPelea()})
+
+  }
+  
+  
+  
   method pelear() {
   
   }
@@ -71,7 +81,11 @@ object latigoCepa {
 
 object alf {
   const pokemon = pokemonAlf
-  
+  method image() = "alf2.png"
+  var property position = game.at(4, 25)
+
+  method consultarPelea() = "Si queres pelear conmigo, apreta la E" 
+
 }
 
 object pokemonAlf {
@@ -109,3 +123,4 @@ object pokemonFede {
   var poderes =[latigoCepa,placaje,mordisco,descanso]
 
 }
+

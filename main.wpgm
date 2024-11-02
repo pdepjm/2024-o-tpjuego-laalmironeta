@@ -5,4 +5,5 @@ import objetos.*
 program PepitaGame {
 	juego.iniciar()
 	game.start()
+
 }

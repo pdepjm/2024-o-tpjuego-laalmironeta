@@ -5,7 +5,7 @@ class Pokemones {
     const property ataques 
 
 
-
+    method ataqueRandom() = ataques.anyOne()
 
     method esDebil(tipo) = tipoPokemon.esDebilA(tipo)
 
@@ -83,30 +83,50 @@ class Batallas {
     var property pokemon2
     var atacante = pokemon1  
     var defensor = pokemon2
+    
+
+
+
 
     //parametrizar para ver cual es el atacante
-    method ataca1(ataque) { ataque.atacarAotro(pokemon2)
+    method ataca1(ataque) { if(atacante.turno() and pokemon1.ataques(ataque)) ataque.atacarAotro(pokemon2)
       
     } 
 
-    method ataca2(ataque) { if(pokemon2.ataques(ataque)) pokemon1.hp(pokemon1.hp() - ataque.poderAtaque())
+    method ataqueRival() = pokemon2.ataqueRandom()
+    method danioAtaque() 
+    
 
 
+
+    method ataca2() {
+      if(defensor.turno()) pokemon1.hp(pokemon1.hp() - ataqueRival.poderAtaque())
     }
 
+
+    //method ataca2() { if(defensor.turno() and pokemon2.ataques()) pokemon1.hp(pokemon1.hp() - .poderAtaque())
+
+
+   // }
+
     method turno() { 
-    if(!self.batallaFinalizada()){atacante.ataca1()
+    if(!self.batallaFinalizada()){
         var atacanteAuxiliar = atacante
         defensor = atacante
         atacante = atacanteAuxiliar
         self.turno()
     
-    
+   
     
        }
 
-
     }
+
+    method mostrarVidaRestante() = pokemon1.hp()
+    method mostrarVidaRestanteRival() = pokemon2.hp()
+
+
+
 
 
     method batallaFinalizada() = pokemon1.perdio() or pokemon2.perdio() 
@@ -127,9 +147,9 @@ const latigoCepa = new Ataques(nombreAtaque = "latigo cepa",tipoAtaque = "planta
 const lanzaLLamas = new Ataques(nombreAtaque = "lanza llamas",tipoAtaque = "fuego",poderAtaque = 35)
 const pistolaDeAgua = new Ataques(nombreAtaque = "pistola de agua",tipoAtaque = "agua",poderAtaque = 35)
 
-const batalla1 = new Batallas(pokemon1 = pikachu,pokemon2 = bulbasaur)
-const batalla2 = new Batallas(pokemon1 = pikachu,pokemon2 = charmander)
-const batalla3 = new Batallas(pokemon1 = pikachu,pokemon2 = squirtle)
+//const batalla1 = new Batallas(pokemon1 = pikachu,pokemon2 = bulbasaur)
+//const batalla2 = new Batallas(pokemon1 = pikachu,pokemon2 = charmander)
+//const batalla3 = new Batallas(pokemon1 = pikachu,pokemon2 = squirtle)
 
 const naza = new Entrenadores(nombreEntrenador = "Naza",pokemonEntrenador = pikachu)
 const alf = new Entrenadores(nombreEntrenador = "Alf",pokemonEntrenador = charmander)
