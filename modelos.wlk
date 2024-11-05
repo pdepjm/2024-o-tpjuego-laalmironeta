@@ -1,9 +1,12 @@
+import objetos.*
 class Pokemones {
     const property nombrePokemon
     const property tipoPokemon 
     var property hp 
-    const property ataques 
+    const property ataques
+    const imagen   
 
+    method image() = imagen
 
     method ataqueRandom() = ataques.anyOne()
 
@@ -12,13 +15,10 @@ class Pokemones {
     method reducirVida(resto) { hp = hp - resto  
       
     }
-
-    method seleccionarAtaque(numero) = if (1 >= numero >= 4)ataques.drop(numero)   
-
-
-    
-    
+  
     method perdio() = self.hp() <= 0
+
+    method text() = "Apreta f para impactrueno, g para placaje, h para mordisco , j para descanso"
 
 }
 
@@ -86,28 +86,49 @@ class Batallas {
     
 
 
+    method pelea() {
+        pokemon1.text()
+        self.elegirAtaque()
+        game.onTick(10000, "nose", self.ataqueRival()) 
+        self.aparecerVida()
+        
 
+
+    }
+
+    method elegirAtaque() {
+        keyboard.f().onPressDo({self.ataca1(impactrueno)})
+        keyboard.g().onPressDo({self.ataca1(placaje)})
+        keyboard.h().onPressDo({self.ataca1(mordisco)})
+        keyboard.j().onPressDo({self.ataca1(descanso)})
+    
+      
+    }
+
+
+   method aparecerVida() {
+     game.addVisual(vida)
+   }
 
     //parametrizar para ver cual es el atacante
     method ataca1(ataque) { if(atacante.turno() and pokemon1.ataques(ataque)) ataque.atacarAotro(pokemon2)
       
     } 
-
-    method ataqueRival() = pokemon2.ataqueRandom()
-    method danioAtaque() 
     
-
-
+    
+    
+    method ataqueRival() = pokemon2.ataqueRandom()
 
     method ataca2() {
-      if(defensor.turno()) pokemon1.hp(pokemon1.hp() - ataqueRival.poderAtaque())
+    if(defensor.turno()) pokemon1.hp(pokemon1.hp() - (pokemon2.ataqueRival()).poderAtaque())
     }
 
+    method pelear(ataque) {
+        self.ataca1(ataque) then (self.ataca2()) 
+    }
 
-    //method ataca2() { if(defensor.turno() and pokemon2.ataques()) pokemon1.hp(pokemon1.hp() - .poderAtaque())
-
-
-   // }
+    
+    
 
     method turno() { 
     if(!self.batallaFinalizada()){
@@ -122,22 +143,38 @@ class Batallas {
 
     }
 
-    method mostrarVidaRestante() = pokemon1.hp()
-    method mostrarVidaRestanteRival() = pokemon2.hp()
-
-
-
-
-
+    method resetVida(){
+        if(self.batallaFinalizada()) pokemon1.hp(100)
+    }
+   
     method batallaFinalizada() = pokemon1.perdio() or pokemon2.perdio() 
 }
 
 
+
+    
+object vida {
+  var property position =  game.at(6, 6)
+  method text() = "vida =" + pikachu.hp()
+}
+
+object vidaRival {
+  var  rival = charmander
+
+  method elRival() {
+    rival = pokemon2.batalla1()
+    
+  }
+
+  var property position =  game.at(6, 6)
+  method text() = "vida =" + pikachu.hp()
+}
+
 //pasar a objeto los tipos
-const pikachu = new Pokemones(nombrePokemon = "Pikachu",tipoPokemon = "Electrico",hp = 100,ataques = [impactrueno,placaje,mordisco,descanso])
-const bulbasaur = new Pokemones(nombrePokemon = "bulbasaur",tipoPokemon = "Planta",hp = 100,ataques = [latigoCepa,placaje,mordisco,descanso])
-const charmander = new Pokemones(nombrePokemon = "charmander",tipoPokemon = "Fuego",hp = 100,ataques = [lanzaLLamas,placaje,mordisco,descanso])
-const squirtle = new Pokemones(nombrePokemon = "Squirtle",tipoPokemon = "Agua",hp = 100,ataques = [pistolaDeAgua,placaje,mordisco,descanso])   
+const pikachu = new Pokemones(nombrePokemon = "Pikachu",tipoPokemon = "Electrico",hp = 100,ataques = [impactrueno,placaje,mordisco,descanso],imagen = "pikachu.png")
+const bulbasaur = new Pokemones(nombrePokemon = "bulbasaur",tipoPokemon = "Planta",hp = 100,ataques = [latigoCepa,placaje,mordisco,descanso],imagen = "bulbasaur.png")
+const charmander = new Pokemones(nombrePokemon = "charmander",tipoPokemon = "Fuego",hp = 100,ataques = [lanzaLLamas,placaje,mordisco,descanso],imagen = "charmander.png")
+const squirtle = new Pokemones(nombrePokemon = "Squirtle",tipoPokemon = "Agua",hp = 100,ataques = [pistolaDeAgua,placaje,mordisco,descanso],imagen = "squirtle.png")   
 
 const impactrueno = new Ataques(nombreAtaque = "impactrueno",tipoAtaque = "Electrico",poderAtaque = 35)
 const placaje = new Ataques(nombreAtaque = "placaje",tipoAtaque = "normal",poderAtaque = 15)
@@ -147,9 +184,9 @@ const latigoCepa = new Ataques(nombreAtaque = "latigo cepa",tipoAtaque = "planta
 const lanzaLLamas = new Ataques(nombreAtaque = "lanza llamas",tipoAtaque = "fuego",poderAtaque = 35)
 const pistolaDeAgua = new Ataques(nombreAtaque = "pistola de agua",tipoAtaque = "agua",poderAtaque = 35)
 
-//const batalla1 = new Batallas(pokemon1 = pikachu,pokemon2 = bulbasaur)
-//const batalla2 = new Batallas(pokemon1 = pikachu,pokemon2 = charmander)
-//const batalla3 = new Batallas(pokemon1 = pikachu,pokemon2 = squirtle)
+const batalla1 = new Batallas(pokemon1 = pikachu,pokemon2 = bulbasaur)
+const batalla2 = new Batallas(pokemon1 = pikachu,pokemon2 = charmander)
+const batalla3 = new Batallas(pokemon1 = pikachu,pokemon2 = squirtle)
 
 const naza = new Entrenadores(nombreEntrenador = "Naza",pokemonEntrenador = pikachu)
 const alf = new Entrenadores(nombreEntrenador = "Alf",pokemonEntrenador = charmander)

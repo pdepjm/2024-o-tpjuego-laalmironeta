@@ -7,20 +7,46 @@ object entrenador {
   method image() = "entrenador2.png"
   const pokemon = pokemonNuestro
   
+
+  
   method iniciarPelea() {
-    game.onCollideDo(alf, alf.consultarPelea() )
-    keyboard.e().onPressDo({juego.pelea()})
-    keyboard.q().onPressDo({juego.quitarPelea()})
+    game.onCollideDo(alf,{elemento => self.consultarPelea()}) 
+   
 
   }
   
+  method consultarPelea() {
+
+    keyboard.e().onPressDo({juego.pelea()})
+    keyboard.q().onPressDo({juego.quitarPelea()})
+    game.say(alf,"Si queres pelear conmigo apreta la E")
+  }
   
+
+  method consultarPelea2() {
+  //if(keyboard.e().onPressDo({juego.pelea()}and game.whenCollideDo(alf))
+  }
   
   method pelear() {
   
   }
 
 }
+
+
+object globoDialogo {
+
+method aparecer() {
+game.onCollideDo(entrenador,{elemento => game.addVisual(self)})
+}
+
+method image() = "dialogo.png"
+
+var property position = game.at(5, 2)
+
+}
+
+
 
 object fondoPelea {
   var property position = game.origin()
@@ -84,7 +110,7 @@ object alf {
   method image() = "alf2.png"
   var property position = game.at(4, 25)
 
-  method consultarPelea() = "Si queres pelear conmigo, apreta la E" 
+   
 
 }
 

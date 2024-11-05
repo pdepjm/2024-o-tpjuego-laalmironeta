@@ -8,6 +8,7 @@ object juego {
     game.addVisualCharacter(entrenador)
     game.addVisual(alf)
     entrenador.iniciarPelea()
+  
     
     
   }
