@@ -11,7 +11,7 @@ UTN - Facultad Regional Buenos Aires - Materia Paradigmas de Programación
 
 ## Capturas 
 
-![pepita](assets/golondrina.png)
+![pepita](assets/captura1.png)
 ## Reglas de Juego / Instrucciones
 El juego trata de que tenes que combatir a otros maestros pokemones.
 Contamos con un pokemon (Pikachu) el cual se enfrentara a los contrincantes.
