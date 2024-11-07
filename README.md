@@ -11,6 +11,7 @@ UTN - Facultad Regional Buenos Aires - Materia Paradigmas de Programación
 
 ## Capturas 
 ![captura1](https://github.com/pdepjm/2024-o-tpjuego-laalmironeta/blob/main/assets/captura1.jpg "Logo Title Text 1")
+![captura2](https://github.com/pdepjm/2024-o-tpjuego-laalmironeta/blob/main/assets/captura2.jpg "Logo Title Text 1")
 ## Reglas de Juego / Instrucciones
 El juego trata de que tenes que combatir a otros maestros pokemones.
 Contamos con un pokemon (Pikachu) el cual se enfrentara a los contrincantes.
