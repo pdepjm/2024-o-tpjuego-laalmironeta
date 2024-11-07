@@ -1,13 +1,15 @@
 import wollok.game.*
 import objetos.*
+import modelos.*
 
 object juego {
   
   method iniciar() {
     self.hacerConfiguracionInicial()
-    game.addVisualCharacter(entrenador)
+    game.addVisualCharacter(naza)
     game.addVisual(alf)
-    entrenador.iniciarPelea()
+    game.addVisual(lucas)
+    naza.iniciarPelea()
   
     
     
@@ -22,17 +24,7 @@ object juego {
 		game.boardGround("mapa2.png")
     } 
 
-    method pelea() {
-      game.addVisual(fondoPelea)
-      game.addVisual(pokemonAlf)
-      game.addVisual(pokemonNuestro)
 
-      }
-    method quitarPelea() {
-      game.removeVisual(fondoPelea)
-      game.removeVisual(pokemonAlf)
-      game.removeVisual(pokemonNuestro)
-    }  
 }
 
 

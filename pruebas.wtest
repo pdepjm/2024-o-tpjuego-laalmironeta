@@ -1,9 +1,11 @@
-//import pepita.*
+import modelos.*
+import juego.*
 
-//describe "group of tests for pepita" {
+describe "Grupo de test de combates" {
 
-  //test "pepita has initial energy" {
-    //assert.equals(100, pepita.energy())
-  //}
+  test "impactrueno baja vida" {
+    batalla2.ataca1(impactrueno)
+    assert.equals(65, charmander.hp()) 
+  }
 
-//}
+}

@@ -1,7 +1,8 @@
 import wollok.game.*
 import juego.*
 
-object entrenador {
+
+/*object entrenador {
   var property position = game.center()
   method position() = position
   method image() = "entrenador2.png"
@@ -11,8 +12,8 @@ object entrenador {
   
   method iniciarPelea() {
     game.onCollideDo(alf,{elemento => self.consultarPelea()}) 
-   
-
+    game.onCollideDo(lucas,{elemento => self.consultarPelea()}) 
+ 
   }
   
   method consultarPelea() {
@@ -23,36 +24,17 @@ object entrenador {
   }
   
 
-  method consultarPelea2() {
-  //if(keyboard.e().onPressDo({juego.pelea()}and game.whenCollideDo(alf))
-  }
+
   
-  method pelear() {
-  
-  }
-
 }
-
-
-object globoDialogo {
-
-method aparecer() {
-game.onCollideDo(entrenador,{elemento => game.addVisual(self)})
-}
-
-method image() = "dialogo.png"
-
-var property position = game.at(5, 2)
-
-}
+*/
 
 
 
-object fondoPelea {
-  var property position = game.origin()
-  method image() = "fondoPelea6.png"
-}
 
+
+
+/*
 object pokemonNuestro {
   var property nombre = "Pikachu"
   const tipo = "electrico"
@@ -69,7 +51,9 @@ object pokemonNuestro {
   }
 
 }
+*/
 // Poderes:
+/*
 object impactrueno {
   const tipoAtaque = "electrico"
   var property danioBase = 35
@@ -104,11 +88,11 @@ object latigoCepa {
   const tipoAtaque = "planta" 
   const danioBase = 35
 }
-
-object alf {
+*/
+/*object alf {
   const pokemon = pokemonAlf
   method image() = "alf2.png"
-  var property position = game.at(4, 25)
+  var property position = game.at(4, 23)
 
    
 
@@ -124,7 +108,7 @@ object pokemonAlf {
    
 }
 
-object Lucas {
+object lucas {
   const pokemon = pokemonLucas
   
 }
@@ -150,3 +134,4 @@ object pokemonFede {
 
 }
 
+*/
