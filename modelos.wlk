@@ -57,15 +57,7 @@ class Ataques {
       
     }
     
-    
-    
-    
-    
     method multiplicador(rival) =if (rival.esDebil(tipoAtaque)) 1.5 else 1
-      
-    
-    
-    
 
 }
 
@@ -224,10 +216,10 @@ object vidaRival {
 }
 
 //pasar a objeto los tipos
-const pikachu = new Pokemones(nombrePokemon = "Pikachu",tipoPokemon = electrico,hp = 100,ataques = [impactrueno,placaje,mordisco,descanso],imagenPokemon = "pikachu.gif", position = game.at(1,3))
+const pikachu = new Pokemones(nombrePokemon = "Pikachu",tipoPokemon = electrico,hp = 100,ataques = [impactrueno,placaje,mordisco,descanso],imagenPokemon = "pikachu5.gif", position = game.at(2,3))
 //const bulbasaur = new Pokemones(nombrePokemon = "bulbasaur",tipoPokemon = "Planta",hp = 100,ataques = [latigoCepa,placaje,mordisco,descanso],imagenPokemon = "bulbasaur.png", position = game.at(2,10))
 const charmander = new Pokemones(nombrePokemon = "charmander",tipoPokemon = fuego,hp = 100,ataques = [lanzaLLamas,placaje,mordisco,descanso],imagenPokemon = "charmander.gif",position = game.at(23, 16))
-const squirtle = new Pokemones(nombrePokemon = "Squirtle",tipoPokemon = agua ,hp = 100,ataques = [pistolaDeAgua,placaje,mordisco,descanso],imagenPokemon = "squirtle.gif",position = game.at(5, 5))   
+const squirtle = new Pokemones(nombrePokemon = "Squirtle",tipoPokemon = agua ,hp = 100,ataques = [pistolaDeAgua,placaje,mordisco,descanso],imagenPokemon = "squirtle.gif",position = game.at(11, 5))   
 
 const impactrueno = new Ataques(nombreAtaque = "impactrueno",tipoAtaque = electrico,poderAtaque = 35)
 const placaje = new Ataques(nombreAtaque = "placaje",tipoAtaque = "normal",poderAtaque = 15)
