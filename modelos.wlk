@@ -100,11 +100,15 @@ method iniciarPelea() {
 
 object fondoPelea {
   var property position = game.origin()
-  method image() = "fondoPelea6.png"
+  method image() = "escenarioFinal.png"
+}
+object barraMenu {
+  var property position = game.at(1,1)
+  method image() = "ataquesPikachu.png"
 }
 
+
 class Batallas {
-    
     var property pokemon1 
     var property pokemon2
     var property turnoAtacante = true   
@@ -114,6 +118,7 @@ class Batallas {
       game.addVisual(fondoPelea)
       game.addVisual(pokemon2)
       game.addVisual(pokemon1)
+      game.addVisual(barraMenu)
       self.elegirAtaque()
       
 
@@ -125,11 +130,6 @@ class Batallas {
       game.removeVisual(pokemon1)
 
     }  
-
-
-
-
-
 
     method pelea() {
         //pokemon1.text()
@@ -224,10 +224,10 @@ object vidaRival {
 }
 
 //pasar a objeto los tipos
-const pikachu = new Pokemones(nombrePokemon = "Pikachu",tipoPokemon = electrico,hp = 100,ataques = [impactrueno,placaje,mordisco,descanso],imagenPokemon = "pikachu.png", position = game.at(2,10))
+const pikachu = new Pokemones(nombrePokemon = "Pikachu",tipoPokemon = electrico,hp = 100,ataques = [impactrueno,placaje,mordisco,descanso],imagenPokemon = "pikachu.gif", position = game.at(1,3))
 //const bulbasaur = new Pokemones(nombrePokemon = "bulbasaur",tipoPokemon = "Planta",hp = 100,ataques = [latigoCepa,placaje,mordisco,descanso],imagenPokemon = "bulbasaur.png", position = game.at(2,10))
-const charmander = new Pokemones(nombrePokemon = "charmander",tipoPokemon = fuego,hp = 100,ataques = [lanzaLLamas,placaje,mordisco,descanso],imagenPokemon = "charmander.png",position = game.at(23, 16))
-const squirtle = new Pokemones(nombrePokemon = "Squirtle",tipoPokemon = agua ,hp = 100,ataques = [pistolaDeAgua,placaje,mordisco,descanso],imagenPokemon = "squirtle.png",position = game.at(23, 16))   
+const charmander = new Pokemones(nombrePokemon = "charmander",tipoPokemon = fuego,hp = 100,ataques = [lanzaLLamas,placaje,mordisco,descanso],imagenPokemon = "charmander.gif",position = game.at(23, 16))
+const squirtle = new Pokemones(nombrePokemon = "Squirtle",tipoPokemon = agua ,hp = 100,ataques = [pistolaDeAgua,placaje,mordisco,descanso],imagenPokemon = "squirtle.gif",position = game.at(5, 5))   
 
 const impactrueno = new Ataques(nombreAtaque = "impactrueno",tipoAtaque = electrico,poderAtaque = 35)
 const placaje = new Ataques(nombreAtaque = "placaje",tipoAtaque = "normal",poderAtaque = 15)
@@ -237,13 +237,13 @@ const latigoCepa = new Ataques(nombreAtaque = "latigo cepa",tipoAtaque = planta,
 const lanzaLLamas = new Ataques(nombreAtaque = "lanza llamas",tipoAtaque = fuego,poderAtaque = 35)
 const pistolaDeAgua = new Ataques(nombreAtaque = "pistola de agua",tipoAtaque = agua,poderAtaque = 35)
 
-//onst batalla1 = new Batallas(pokemon1 = pikachu,pokemon2 = bulbasaur, desafiante = ivo)
+//const batalla1 = new Batallas(pokemon1 = pikachu,pokemon2 = bulbasaur, desafiante = ivo)
 const batalla2 = new Batallas(pokemon1 = pikachu,pokemon2 = charmander)
 const batalla3 = new Batallas(pokemon1 = pikachu,pokemon2 = squirtle)
 
-const naza = new Protagonista(nombreEntrenador = "Naza",pokemonEntrenador = pikachu, imagenEntrenador= "entrenador2.png", position = game.center())
-const alf = new Entrenadores(nombreEntrenador = "Alf",pokemonEntrenador = squirtle, imagenEntrenador= "alf2.png", position = game.at(4, 23))
-const lucas = new Entrenadores(nombreEntrenador = "Lucas",pokemonEntrenador = charmander, imagenEntrenador= "lucas.png", position= game.at(27, 27))
+const naza = new Protagonista(nombreEntrenador = "Naza",pokemonEntrenador = pikachu, imagenEntrenador= "protagonista.png", position = game.center())
+const alf = new Entrenadores(nombreEntrenador = "Alf",pokemonEntrenador = squirtle, imagenEntrenador= "alfredo.png", position = game.at(1, 1))
+const lucas = new Entrenadores(nombreEntrenador = "Lucas",pokemonEntrenador = charmander, imagenEntrenador= "lucasS.png", position= game.at(4, 5))
 //const ivo = new Entrenadores(nombreEntrenador = "Ivo",pokemonEntrenador = bulbasaur)
 
 

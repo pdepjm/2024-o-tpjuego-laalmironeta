@@ -19,9 +19,9 @@ object juego {
 
   method hacerConfiguracionInicial() {
 		game.title("PokeWollok")
-		game.width(40)
-		game.height(40) 
-		game.boardGround("mapa2.png")
+		game.width(15)
+		game.height(11) 
+		game.boardGround("mapa3.jpg")
     } 
 
 
