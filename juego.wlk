@@ -13,6 +13,7 @@ object juego {
     naza.dialogos()
     naza.pelearConAlf()
     naza.pelearConLucas()
+    naza.pelearConIvo()
   }
   
   method hacerConfiguracionInicial() {
