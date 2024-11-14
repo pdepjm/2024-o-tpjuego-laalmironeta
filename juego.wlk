@@ -9,14 +9,12 @@ object juego {
     game.addVisualCharacter(naza)
     game.addVisual(alf)
     game.addVisual(lucas)
-    naza.iniciarPelea()
-  
-    
-    
+    game.addVisual(ivo)
+    naza.dialogos()
+    naza.pelearConAlf()
+    naza.pelearConLucas()
   }
   
- 
-
   method hacerConfiguracionInicial() {
 		game.title("PokeWollok")
 		game.width(15)
