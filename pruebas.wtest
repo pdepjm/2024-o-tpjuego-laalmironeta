@@ -1,50 +1,52 @@
 import modelos.*
 import juego.*
 
+
 describe "Grupo de test de combates" {
 
-  test " impactrueno baja vida" {
+  test " impactrueno efectivo ante squirtle" {
     batalla.pokemon1(pikachu)
     batalla.pokemon2(squirtle) 
     batalla.ataca1(impactrueno)
-    batalla.alternarTurno()
-    batalla.ataca1(impactrueno)
-    assert.that(squirtle.perdio())
+    assert.equals(290, squirtle.hp())
 
   }
 
-  test "ataca pokemon rival baja vida" {
-    batalla2.alternarTurno() 
-    batalla2.ataca2()
-    assert.that(pikachu.hp() < 100)
+  test "impactrueno baja bien vida a charmander" {
+    batalla.pokemon1(pikachu) 
+    batalla.pokemon2(charmander)
+    batalla.ataca1(impactrueno)
+    assert.equals(305, charmander.hp())
   }
 
     test " si no es turno pokemon rival no ataca" {
-    batalla2.ataca2()
-    assert.that(pikachu.hp() == 100)
+    batalla.pokemon1(pikachu) 
+    batalla.pokemon2(charmander)
+    batalla.ataca2()
+    assert.that(pikachu.hp() == 320)
   }
 
     test " si no es turno pokemon propio no ataca" {
-    batalla2.alternarTurno()
-    batalla2.ataca1(impactrueno)
-    assert.that(charmander.hp() == 100)
+    batalla.pokemon1(pikachu) 
+    batalla.pokemon2(charmander)  
+    batalla.alternarTurno()
+    batalla.ataca1(impactrueno)
+    assert.that(charmander.hp() == 320)
   }
 
   test " descanso solo saca 1 de vida" {
-    batalla2.ataca1(descanso)
-    assert.equals(99,charmander.hp())
+    batalla.pokemon1(pikachu) 
+    batalla.pokemon2(charmander)
+    batalla.ataca1(descanso)
+    assert.equals(319,charmander.hp())
   }
 
-  test "impactrueno es superefectivo" {
-    batalla3.ataca1(impactrueno)
-    assert.equals(65, squirtle.hp()) 
+  test "fuego es debil a electrico" {
+
+    assert.notThat(fuego.esDebilA(electrico)) 
   }
 
 
 }
-
-
-
-
 
 
