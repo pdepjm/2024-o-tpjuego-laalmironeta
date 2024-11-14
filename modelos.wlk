@@ -1,28 +1,28 @@
 import juego.*
 
 class Pokemon {
-    var property tipoPokemon 
+    const property tipoPokemon 
     var property hp 
-    var property ataques
-    var property imagenPokemon
+    const property ataques
+    const property imagenPokemon
     var property position   
 
     method image() = imagenPokemon
 
-    method reducirVida(resto){
-      hp = hp - resto
-
-    }
+    method text() = "La vida es de " + hp
 
     method ataqueRandom() = ataques.anyOne()
 
     method esDebil(tipo) = tipoPokemon.esDebilA(tipo)
 
-    method perdio() = self.hp() <= 0
+    method perdio() = self.hp() <= 0 
+
 
 }
+
+
 object fuego {
-    method esDebilA(agua) = true
+    method esDebilA(tipo) = tipo == agua
 
 }
 object agua {
@@ -30,25 +30,26 @@ object agua {
 }
 
 object planta {
-    method esDebilA(fuego) = true
+    method esDebilA(tipo) = tipo == fuego
   
 }
 
 object electrico {
 
-    method esDebilA(roca) = true
+    method esDebilA(tipo) = false
   
 }
 
 object normal{
 
-  method esDebilA(lucha) = true
+  method esDebilA(tipo) = false
 }
 
 object siniestro {
-  method esDebilA(lucha) = true 
+  method esDebilA(tipo) = false
   
 }
+
 
 class Ataque {
     var property tipoAtaque 
@@ -59,17 +60,18 @@ class Ataque {
       game.sound(sonidoAtaque).play()
     } 
 
-    method atacarAotro(rival) { rival.reducirVida(self.poderAtaque() * self.multiplicador(rival)) 
+    method saberMulti(poke) =  if(poke.esDebil(tipoAtaque)) 2 else 1
       
-    }
     
-    method multiplicador(rival) = if (rival.esDebil(tipoAtaque)) 1.5 else 1
+    
+    method danioReal(poke) = poderAtaque * self.saberMulti(poke)
+
 
 }
 
 class Entrenador {
-    var property pokemonEntrenador  
-    var property imagenEntrenador
+    const property pokemonEntrenador  
+    const property imagenEntrenador
     var property position  
     method image() = imagenEntrenador
   
@@ -98,7 +100,9 @@ class Protagonista inherits Entrenador {
       game.onCollideDo(lucas, {elemento => batalla.inicializarPeleaLucas()})
     }
 
-   
+    method pelearConIvo() {
+      game.onCollideDo(ivo, {elemento => batalla.inicializarPeleaIvo()})
+    }   
 
 
 
@@ -110,17 +114,10 @@ class Protagonista inherits Entrenador {
   }
 
   method consultarIvo() {
-    game.say(ivo,"Hoy soy el ayudante de la muerte, toca Y")
+   game.say(ivo,"Hoy soy el ayudante de la muerte, toca Y")
   }
 
   
-
-
-}
-
-object tituloBattle {
-  var property position = game.at(5,12)
-  method image() = "barraAtaquePikachu.png"
 }
 
 
@@ -143,22 +140,21 @@ object pokebola {
 
 }
 object batalla {
-    var property nosotros = naza 
-    var property rival = alf
-    var property pokemon1 = nosotros.pokemonEntrenador()
+    var nosotros = naza 
+    var rival = alf
+    var property pokemon1 = pikachu
     var property pokemon2 = rival.pokemonEntrenador() 
     var property turnoAtacante = true   
     var property sonido = game.sound("musicaBatalla.mp3")
-    var property vidaRival = "vida =" + pokemon2.hp()
 
 
-      method inicializarPeleaLucas() { 
+      method inicializarPeleaLucas() { if(!self.batallaFinalizada())
       keyboard.e().onPressDo({ self.setearLucas() self.pelear()})
       }
-      method inicializarPeleaAlf() { 
+      method inicializarPeleaAlf() { if(!self.batallaFinalizada())
       keyboard.z().onPressDo({ self.setearAlf() self.pelear()})
       }
-      method inicializarPeleaIvo() { 
+      method inicializarPeleaIvo() { if(!self.batallaFinalizada())
       keyboard.y().onPressDo({ self.setearIvo() self.pelear()})
       }
 
@@ -166,39 +162,31 @@ object batalla {
 
     method setearLucas(){
       rival = lucas
-      pokemon2 = charmander
       nosotros = naza
-      pokemon1 = pikachu
+      pokemon1 = naza.pokemonEntrenador()
+      pokemon2 = charmander
+
     }
 
     method setearAlf(){
       rival = alf
-      pokemon2 = squirtle
       nosotros = naza
-      pokemon1 = pikachu
+      pokemon1 = naza.pokemonEntrenador()
+      pokemon2 = squirtle
     }
 
     method setearIvo(){
       rival = ivo
-      pokemon2 = bulbasaur
       nosotros = naza
-      pokemon1 = pikachu
+      pokemon1 = naza.pokemonEntrenador()
+      pokemon2 = bulbasaur
     }
 
-    method inicializarPeleas() { 
-      keyboard.e().onPressDo({self.pelear()})
-      
-    }
 
-   //  method inicializarPelea2() { 
-     // keyboard.e().onPressDo({self.pelear()})
-      
- //   }
 
     method pelear() {
-     
+      if(!self.batallaFinalizada())
       game.addVisual(fondoPelea)
-      game.addVisual(tituloBattle)
       game.addVisual(pokemon2)
       game.addVisual(pokemon1)
       game.addVisual(barraMenu)
@@ -206,7 +194,6 @@ object batalla {
       pokebola.play()
       sonido.play()
       sonido.shouldLoop(true)
-      //vida.verVida()
       }
 
     
@@ -214,34 +201,22 @@ object batalla {
 
     method quitarPelea() {
       game.removeVisual(fondoPelea)
-      game.removeVisual(tituloBattle)
       game.removeVisual(pokemon2)
       game.removeVisual(pokemon1)
       game.removeVisual(barraMenu)
       sonido.stop()
       naza.mover()
       game.removeVisual(rival)
-      rival = null
-      nosotros = null
-
-    
-
+      pokemon1.hp(320)
+      pokemon2.hp(320)
+      
     }  
-    method pelea() {
-        //pokemon1.text()
-        self.elegirAtaque()
-        self.aparecerVida()
-         }
-
-   method aparecerVida() {
-     game.addVisual(vida)
-   }
-
-    method ataca1(ataque) { if(self.turnoAtacante()) ataque.atacarAotro(pokemon2) ataque.play() 
+  
+    method ataca1(ataque) { if(self.turnoAtacante()) pokemon2.hp(pokemon2.hp() - ataque.danioReal(pokemon2)) ataque.play() 
       
     } 
     
-          
+
 
 
     method ataca2() {
@@ -259,71 +234,48 @@ object batalla {
     method elegirAtaque() {
     keyboard.f().onPressDo({self.ataca1(impactrueno)                        
                             self.alternarTurno()
-                            game.onTick(3000,"espera pa",{self.ataca2()})
+                            self.ataca2()
                             self.alternarTurno()
-                            if (self.batallaFinalizada()) pokemon1.hp(100) self.quitarPelea()})
+                            if(self.batallaFinalizada()) self.quitarPelea()})
     keyboard.g().onPressDo({self.ataca1(placaje)
                             placaje.play()
                             self.alternarTurno()
                             self.ataca2()
-                            game.schedule(5000,{self.alternarTurno()})
+                            self.alternarTurno()
                             if (self.batallaFinalizada()) self.quitarPelea()})
     keyboard.h().onPressDo({self.ataca1(mordisco)
                             mordisco.play()
                             self.alternarTurno()
                             self.ataca2()
-                            game.schedule(5000,{self.alternarTurno()})
+                            self.alternarTurno()
                             if (self.batallaFinalizada()) self.quitarPelea()})
     keyboard.j().onPressDo({self.ataca1(descanso)
                             descanso.play()
                             self.alternarTurno()
                             self.ataca2()
-                            game.schedule(5000,{self.alternarTurno()})
+                            self.alternarTurno()
                             if (self.batallaFinalizada()) self.quitarPelea()})
     }
     
 
- 
-    method resetVida(){
-        if(self.batallaFinalizada()) pokemon1.hp(100)
-    }
    
     method batallaFinalizada() = pokemon1.perdio() or pokemon2.perdio() 
 }
 
-object vida {
-  var property position =  game.at(6, 6)
-  method text() = "vida =" + pikachu.hp()
-  method verVida() {
-    game.say(self, self.text())
-    
-  }
-}
+const pikachu = new Pokemon(tipoPokemon = electrico,hp = 320,ataques = [impactrueno,placaje,mordisco,descanso],imagenPokemon = "pikachu5.gif", position = game.at(2,2))
+const bulbasaur = new Pokemon(tipoPokemon = planta,hp = 320,ataques = [latigoCepa,placaje,mordisco,descanso],imagenPokemon = "Bulbasaur.gif", position = game.at(11,5))
+const charmander = new Pokemon(tipoPokemon = fuego,hp = 320,ataques = [lanzaLLamas,placaje,mordisco,descanso],imagenPokemon = "charmander5.gif",position = game.at(11, 5))
+const squirtle = new Pokemon(tipoPokemon = agua ,hp = 320,ataques = [pistolaDeAgua,placaje,mordisco,descanso],imagenPokemon = "squirtle.gif",position = game.at(11, 5))   
 
-object vidaRival {
-
-//  var  rival = charmander
-  var property position =  game.at(6, 6)
-  //var vida = 
-}
-
-
-const pikachu = new Pokemon(tipoPokemon = electrico,hp = 100,ataques = [impactrueno,placaje,mordisco,descanso],imagenPokemon = "pikachu5.gif", position = game.at(2,3))
-const bulbasaur = new Pokemon(tipoPokemon = planta,hp = 100,ataques = [latigoCepa,placaje,mordisco,descanso],imagenPokemon = "bulbasaur.png", position = game.at(2,10))
-const charmander = new Pokemon(tipoPokemon = fuego,hp = 100,ataques = [lanzaLLamas,placaje,mordisco,descanso],imagenPokemon = "charmander5.gif",position = game.at(11, 5))
-const squirtle = new Pokemon(tipoPokemon = agua ,hp = 100,ataques = [pistolaDeAgua,placaje,mordisco,descanso],imagenPokemon = "squirtle.gif",position = game.at(11, 5))   
-
-const impactrueno = new Ataque(tipoAtaque = electrico,poderAtaque = 35,sonidoAtaque = "sonidoElectrico.mp3")
-const placaje = new Ataque(tipoAtaque = "normal",poderAtaque = 15, sonidoAtaque = "sonidoPlacaje.mp3")
-const mordisco = new Ataque(tipoAtaque = "siniestro",poderAtaque = 25,sonidoAtaque = "sonidoMordido.mp3") 
+const impactrueno = new Ataque(tipoAtaque = electrico,poderAtaque = 15,sonidoAtaque = "sonidoElectrico.mp3")
+const placaje = new Ataque(tipoAtaque = "normal",poderAtaque = 10, sonidoAtaque = "sonidoPlacaje.mp3")
+const mordisco = new Ataque(tipoAtaque = "siniestro",poderAtaque = 12,sonidoAtaque = "sonidoMordido.mp3") 
 const descanso = new Ataque(tipoAtaque = "normal",poderAtaque = 1, sonidoAtaque ="")
-const latigoCepa = new Ataque(tipoAtaque = planta,poderAtaque = 35, sonidoAtaque = "sonidoLatigo.mp3")
-const lanzaLLamas = new Ataque(tipoAtaque = fuego,poderAtaque = 35, sonidoAtaque ="")
-const pistolaDeAgua = new Ataque(tipoAtaque = agua,poderAtaque = 35, sonidoAtaque ="")
+const latigoCepa = new Ataque(tipoAtaque = planta,poderAtaque = 15, sonidoAtaque = "sonidoLatigo.mp3")
+const lanzaLLamas = new Ataque(tipoAtaque = fuego,poderAtaque = 15, sonidoAtaque ="")
+const pistolaDeAgua = new Ataque(tipoAtaque = agua,poderAtaque = 15, sonidoAtaque ="")
 
 const naza = new Protagonista(pokemonEntrenador = pikachu, imagenEntrenador= "protagonista.png", position = game.at(11,1))
 const alf = new Entrenador(pokemonEntrenador = squirtle, imagenEntrenador= "alfredo.png", position = game.at(8, 7))
 const lucas = new Entrenador(pokemonEntrenador = charmander, imagenEntrenador = "lucasS.png", position= game.at(13, 7))
 const ivo = new Entrenador(pokemonEntrenador = bulbasaur, imagenEntrenador = "ivan.png", position = game.at(3,3))
-
-
